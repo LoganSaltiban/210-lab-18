@@ -3,20 +3,19 @@
 
 using namespace std;
 
-// LL Function Prototypes
-void addNodeToHead(Node* &head);
-void addNodeToTail(Node* &head);
-
-
 // Create our Node Structure
 class Node
 {
+    public:
     int reviewRating;
     string reviewComment;
 
     Node* next;
 };
 
+// LL Function Prototypes
+void addNodeToHead(Node* &head);
+void addNodeToTail(Node* &head);
 
 int main()
 {
@@ -24,11 +23,8 @@ int main()
     Node* head = nullptr;
 
     // Initialize our Upkeep Variables
-    char listChoice = '';
-    char continueChoice = '';
-
-
-
+    char listChoice = '.';
+    char continueChoice = '.';
 
     return 0;
 }
@@ -49,7 +45,7 @@ void addNodeToHead(Node* &head)
     if (userReview < 0 || userReview > 5)
     {
         cout << "\nInvalid Review Rating";
-        break;
+        return;
     }
 
     // Get Review Comment
@@ -67,7 +63,11 @@ void addNodeToHead(Node* &head)
     // Now Connect the List. 2 Test Cases: If the list if filled or not.
     if (head) // 
     {
-
+        newNode->next = head;
+        head = newNode;
+    } else 
+    {
+        head = newNode;
     }
 
 
@@ -90,7 +90,7 @@ void addNodeToTail(Node* &head)
     if (userReview < 0 || userReview > 5)
     {
         cout << "\nInvalid Review Rating";
-        break;
+        return;
     }
 
     // Get Review Comment
@@ -116,8 +116,8 @@ void addNodeToTail(Node* &head)
 
         traversalPtr->next = newNode; // Connect end of List to newNode
 
-    } else {
-
+    } else 
+    {
         head = newNode;
     }
 }
