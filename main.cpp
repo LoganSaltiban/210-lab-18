@@ -3,11 +3,15 @@
 
 using namespace std;
 
+
+// Review Tracker Variable
+static int reviewCount = 0;
+
 // Create our Node Structure
 class Node
 {
     public:
-    int reviewRating;
+    double reviewRating;
     string reviewComment;
 
     Node* next;
@@ -34,10 +38,10 @@ int main()
 
         if (listChoice == 1)
         {
-            addNodeToHead();
+            addNodeToHead(head);
         } else if (listChoice == 2)
         {
-            addNodeToTail();
+            addNodeToTail(head);
         } else
         {
             cout << "Invalid Input" << endl;
@@ -75,12 +79,13 @@ void addNodeToHead(Node* &head)
     Node* newNode = new Node;
 
     // Initialize Input Variables
-    int userReview = 0;
+    double userReview = 0;
     string userComment = "";
 
     // Get Review Rating & Test-Case
     cout << "(0-5) Enter Review Rating: ";
     cin >> userReview;
+    cin.ignore();
 
     if (userReview < 0 || userReview > 5)
     {
@@ -89,7 +94,6 @@ void addNodeToHead(Node* &head)
     }
 
     // Get Review Comment
-    cin.ignore();
     cout << "\nEnter Review Comment: ";
     getline(cin, userComment);
 
@@ -119,13 +123,14 @@ void addNodeToTail(Node* &head)
     Node* newNode = new Node;
 
     // Initialize Input Variables
-    int userReview = 0;
+    double userReview = 0;
     string userComment = "";
 
     // User Input
     // Get Review Rating & Test-Case
     cout << "(0-5) Enter Review Rating: ";
     cin >> userReview;
+    cin.ignore();
 
     if (userReview < 0 || userReview > 5)
     {
@@ -134,7 +139,6 @@ void addNodeToTail(Node* &head)
     }
 
     // Get Review Comment
-    cin.ignore();
     cout << "\nEnter Review Comment: ";
     getline(cin, userComment);
 
@@ -164,6 +168,27 @@ void addNodeToTail(Node* &head)
 
 void printNodes(Node* &head)
 {
+    // Create Average Counter
+
     // Print Node Data as long as next isnt a nullptr
-    
+    Node* traversalPtr = head;
+    double averageTracker = 0.0;
+
+    // Test Case if theres no Nodes to Print
+    if (!traversalPtr) { cout << "Invalid Review List" << endl; return; }
+
+    // Traverse through List
+    while (traversalPtr)
+    {
+        cout << "Review #" << reviewCount + 1 << " " << traversalPtr->reviewRating << ": " << traversalPtr->reviewComment << endl;
+
+        // Add Average Count and Review Count in List
+        averageTracker += traversalPtr->reviewRating;
+        reviewCount++;
+
+        // Point to next node
+        traversalPtr = traversalPtr->next;
+    }
+
+    cout << "\nAverage Rating: " << averageTracker / static_cast<double>(reviewCount) << endl;
 }
