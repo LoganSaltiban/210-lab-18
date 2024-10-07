@@ -91,7 +91,7 @@ void addNodeToHead(Node* &head)
 
     if (userReview < 0 || userReview > 5)
     {
-        cout << "\nInvalid Review Rating";
+        cout << "\nInvalid Review Rating" << endl;
         return;
     }
 
