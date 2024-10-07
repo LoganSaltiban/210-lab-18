@@ -55,6 +55,8 @@ int main()
 
     } // End While
 
+    printNodes(head);
+
     return 0;
 }
 
