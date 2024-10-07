@@ -16,17 +16,57 @@ class Node
 // LL Function Prototypes
 void addNodeToHead(Node* &head);
 void addNodeToTail(Node* &head);
+void printNodes(Node* &head);
+int getListChoice();
 
 int main()
 {
     // Create head pointer
     Node* head = nullptr;
 
-    // Initialize our Upkeep Variables
-    char listChoice = '.';
-    char continueChoice = '.';
+    // Initialize our Choice Variables
+    char continueChoice = 'Y';
+
+    // Start out menu while loop.
+    while (continueChoice == 'Y' || continueChoice == 'y')
+    {
+        int listChoice = getListChoice();
+
+        if (listChoice == 1)
+        {
+            addNodeToHead();
+        } else if (listChoice == 2)
+        {
+            addNodeToTail();
+        } else
+        {
+            cout << "Invalid Input" << endl;
+            return 1;
+        }
+
+        // Ask for Continue Choice Again
+        cout << "Would you like to add another Review?";
+        cin >> continueChoice;
+        cin.ignore();
+
+    } // End While
 
     return 0;
+}
+
+int getListChoice()
+{
+    // Temp Tracker Variable
+    int tempChoice = 0;
+
+    // Get User Input
+    cout << "Would you like your data entered to the front or back of the list?" << endl;
+    cout << "[1]: Front" << endl << "[2]: Back" << endl;
+    cin >> tempChoice;
+    cin.ignore();
+
+    // Return Input
+    return tempChoice;
 }
 
 void addNodeToHead(Node* &head)
@@ -120,4 +160,10 @@ void addNodeToTail(Node* &head)
     {
         head = newNode;
     }
+}
+
+void printNodes(Node* &head)
+{
+    // Print Node Data as long as next isnt a nullptr
+    
 }
